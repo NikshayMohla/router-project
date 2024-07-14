@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 
-const SignupForm = () => {
+const SignupForm = ({ setIsLoggedIn }) => {
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -18,6 +20,17 @@ const SignupForm = () => {
     };
 
     const [showPassword, setShowPassword] = useState(false);
+    let navigate = useNavigate()
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (formData.password != formData.confirmPassword) {
+            toast.error("Sahi Password Daal")
+            return;
+        }
+        setIsLoggedIn(true)
+        toast.success(`Welcome`);
+        navigate("/dashboard")
+    }
 
     return (
         <div>
@@ -25,7 +38,7 @@ const SignupForm = () => {
                 <button>Student</button>
                 <button>Instructor</button>
             </div>
-            <form action="">
+            <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor="firstName">
                         <p>First Name <sup>*</sup></p>
@@ -34,9 +47,9 @@ const SignupForm = () => {
                         required
                         type="text"
                         name='firstName'
-                        onChange={changeHandler} 
+                        onChange={changeHandler}
                         placeholder='Enter First Name'
-                        value={formData.firstName} 
+                        value={formData.firstName}
                     />
                     <label htmlFor="lastName">
                         <p>Last Name <sup>*</sup></p>
@@ -45,9 +58,9 @@ const SignupForm = () => {
                         required
                         type="text"
                         name='lastName'
-                        onChange={changeHandler} 
+                        onChange={changeHandler}
                         placeholder='Enter Last Name'
-                        value={formData.lastName} 
+                        value={formData.lastName}
                     />
                 </div>
                 <label htmlFor="email">
@@ -57,9 +70,9 @@ const SignupForm = () => {
                     required
                     type="email"
                     name='email'
-                    onChange={changeHandler} 
+                    onChange={changeHandler}
                     placeholder='Enter Email'
-                    value={formData.email} 
+                    value={formData.email}
                 />
                 <div>
                     <label htmlFor="password">
@@ -68,7 +81,7 @@ const SignupForm = () => {
                             required
                             type={showPassword ? "text" : "password"}
                             name='password'
-                            onChange={changeHandler} 
+                            onChange={changeHandler}
                             placeholder='Enter Password'
                             value={formData.password}
                         />
@@ -82,7 +95,7 @@ const SignupForm = () => {
                             required
                             type={showPassword ? "text" : "password"}
                             name='confirmPassword'
-                            onChange={changeHandler} 
+                            onChange={changeHandler}
                             placeholder='Confirm Password'
                             value={formData.confirmPassword}
                         />
