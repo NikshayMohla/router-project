@@ -1,5 +1,10 @@
 import React from 'react'
 import frameImage from "../assets/frame.png"
+import SignUpForm from "../components/SignupForm";
+import LoginForm from "../components/LoginForm";
+
+
+
 const Template = ({ title, desc1, desc2, image, formtype, setIsLoggedIn }) => {
     return (
         <div>
