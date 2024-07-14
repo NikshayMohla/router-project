@@ -1,46 +1,55 @@
-import React, { useState } from 'react'
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { Link } from 'react-router-dom'
-
+import React, { useState } from 'react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-
     const [formData, setFormData] = useState({
         email: "",
         password: ""
-    })
+    });
 
     const changeHandler = (e) => {
         setFormData((prevData) => ({
             ...prevData,
             [e.target.name]: e.target.value
-        }))
-    }
-    const [showPassword, setshowPassword] = useState(false)
+        }));
+    };
+
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
         <form action="">
-            <label htmlFor="">
+            <label htmlFor="email">
                 <p>Email Address<sup>*</sup></p>
-                <input required type="text" value={formData.email}
+                <input 
+                    required 
+                    type="email" 
+                    value={formData.email}
                     onChange={changeHandler}
-                    placeholder='random@random.com' name='email' />
+                    placeholder='random@random.com' 
+                    name='email' 
+                />
             </label>
-            <label htmlFor="">
-                <p>Email Address<sup>*</sup></p>
-                <input required type={showPassword ? ("text") : ("passwords")} value={formData.password} onChange={changeHandler} placeholder='Enter Your Password' name='password' />
-
-                <span onClick={() => setshowPassword((prev) => !prev)}>
-                    showPassword?(<AiOutlineEyeInvisible />):(<AiOutlineEye />)
+            <label htmlFor="password">
+                <p>Password<sup>*</sup></p>
+                <input 
+                    required 
+                    type={showPassword ? "text" : "password"} 
+                    value={formData.password} 
+                    onChange={changeHandler} 
+                    placeholder='Enter Your Password' 
+                    name='password' 
+                />
+                <span onClick={() => setShowPassword((prev) => !prev)}>
+                    {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
                 </span>
-                <Link to="">
+                <Link to="/forgot-password">
                     <p>Forgot Password</p>
                 </Link>
             </label>
-
             <button>Sign In</button>
-
         </form>
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;

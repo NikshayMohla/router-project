@@ -1,7 +1,5 @@
 import Template from "../components/Template";
 import signupImg from "../assets/signup.png";
-import SignupForm from "../components/SignupForm";
-import LoginForm from "../components/LoginForm";
 
 function Signup({ setIsLoggedIn }) {
     return (
